@@ -18,7 +18,7 @@ namespace CourseWorkScheduleBot.Handlers
             {
                 return new()
                 {
-                    TextMessage = new() { Text = "Помилка в описі проекту! Введіть ще раз." },
+                    TextMessage = new() { Text = "Помилка в описі проекту! Введіть ще раз:" },
                     ReplyMarkup = ReplyMarkupFactory.CreateEmptyKeyboardMarkup()
                 };
             }
@@ -28,7 +28,9 @@ namespace CourseWorkScheduleBot.Handlers
 
             return new()
             {
-                TextMessage = new() { Text = "Дані збережено!" },
+                TextMessage = new() { 
+                    Text = "Дані збережено! Тепер Ви можете скористатися командами з меню!" 
+                },
                 ReplyMarkup = ReplyMarkupFactory.CreateDefaultKeyboardMarkup()
             };
         }

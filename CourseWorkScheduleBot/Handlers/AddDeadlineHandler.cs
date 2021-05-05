@@ -35,7 +35,9 @@ namespace CourseWorkScheduleBot.Handlers
             {
                 return new()
                 {
-                    TextMessage = new() { Text = "Помилка в інформації про дедлайн! Введіть ще раз." },
+                    TextMessage = new() { 
+                        Text = "Помилка в інформації про дедлайн! Введіть ще раз:" 
+                    },
                     ReplyMarkup = ReplyMarkupFactory.CreateEmptyKeyboardMarkup()
                 };
             }
@@ -55,15 +57,13 @@ namespace CourseWorkScheduleBot.Handlers
             studentUser.ConversationState = ConversationState.WaitingForDeadline;
             return new()
             {
-                TextMessage = new() { Text = "Введіть інформацію про дедлайн:" },
+                TextMessage = new() { Text = "Будь-ласка, введіть інформацію про дедлайн:" },
                 ReplyMarkup = ReplyMarkupFactory.CreateEmptyKeyboardMarkup()
             };
         }
 
-        private bool RequestIsProvidedDeadline(StudentUser studentUser)
-        {
-            return studentUser.ConversationState == ConversationState.WaitingForDeadline;
-        }
+        private bool RequestIsProvidedDeadline(StudentUser studentUser) =>
+            studentUser.ConversationState == ConversationState.WaitingForDeadline;
 
         private bool RequestIsAddDeadlineCommand(StudentUser studentUser, Message message)
         {

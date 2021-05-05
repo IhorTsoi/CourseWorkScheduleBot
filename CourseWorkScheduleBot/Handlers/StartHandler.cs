@@ -32,7 +32,7 @@ namespace CourseWorkScheduleBot.Handlers
                 TextMessage = new()
                 {
                     Text =
-                    "Вас було зареєстровано!\n" +
+                    "Вітаю☺️ Вас було зареєстровано!\n" +
                     "Будь-ласка, введіть назву Вашого проекту:"
                 },
                 ReplyMarkup = ReplyMarkupFactory.CreateEmptyKeyboardMarkup()

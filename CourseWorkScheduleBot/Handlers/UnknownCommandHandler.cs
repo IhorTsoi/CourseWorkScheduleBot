@@ -9,16 +9,19 @@ namespace CourseWorkScheduleBot.Handlers
 
         public Response Handle(StudentUser studentUser, Message message)
         {
+            var text = "Нажаль, я Вас не розумію😞";
             var replyMarkup = ReplyMarkupFactory.CreateEmptyKeyboardMarkup();
+
             if (studentUser is not null &&
                 studentUser.ConversationState == ConversationState.ProjectRegistered)
             {
+                text = $"{text} Будь-ласка, оберіть одну з команд!";
                 replyMarkup = ReplyMarkupFactory.CreateDefaultKeyboardMarkup();
             }
 
             return new()
             {
-                TextMessage = new() { Text = "Я Вас не розумію(" },
+                TextMessage = new() { Text =  text },
                 ReplyMarkup = replyMarkup
             };
         }
