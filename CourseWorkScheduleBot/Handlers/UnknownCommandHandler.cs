@@ -1,4 +1,5 @@
 ﻿using CourseWorkScheduleBot.Models;
+using System.Threading.Tasks;
 using Telegram.Bot.Types;
 
 namespace CourseWorkScheduleBot.Handlers
@@ -7,7 +8,7 @@ namespace CourseWorkScheduleBot.Handlers
     {
         public bool CanHandleRequest(StudentUser studentUser, Message message) => true;
 
-        public Response Handle(StudentUser studentUser, Message message)
+        public Task<Response> HandleAsync(StudentUser studentUser, Message message)
         {
             var text = "Нажаль, я Вас не розумію😞";
             var replyMarkup = ReplyMarkupFactory.CreateEmptyKeyboardMarkup();
@@ -19,11 +20,11 @@ namespace CourseWorkScheduleBot.Handlers
                 replyMarkup = ReplyMarkupFactory.CreateDefaultKeyboardMarkup();
             }
 
-            return new()
+            return Task.FromResult(new Response()
             {
-                TextMessage = new() { Text =  text },
+                TextMessage = new() { Text = text },
                 ReplyMarkup = replyMarkup
-            };
+            });
         }
     }
 }

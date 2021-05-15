@@ -1,6 +1,7 @@
 ﻿using CourseWorkScheduleBot.Messages;
 using CourseWorkScheduleBot.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
@@ -17,15 +18,15 @@ namespace CourseWorkScheduleBot.Handlers
                 message.Text.Equals(Commands.ViewProjectSummary);
         }
 
-        public Response Handle(StudentUser studentUser, Message message)
+        public Task<Response> HandleAsync(StudentUser studentUser, Message message)
         {
             var projectSummaryMessage = ConstructProjectSummaryMessage(studentUser.Project);
 
-            return new()
+            return Task.FromResult(new Response()
             {
                 TextMessage = projectSummaryMessage,
                 ReplyMarkup = ReplyMarkupFactory.CreateDefaultKeyboardMarkup()
-            };
+            });
         }
 
         private TextMessage ConstructProjectSummaryMessage(Project project)

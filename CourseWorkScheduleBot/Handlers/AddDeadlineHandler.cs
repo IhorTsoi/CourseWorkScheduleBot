@@ -1,4 +1,5 @@
 ﻿using CourseWorkScheduleBot.Models;
+using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
@@ -16,15 +17,15 @@ namespace CourseWorkScheduleBot.Handlers
                 );
         }
 
-        public Response Handle(StudentUser studentUser, Message message)
+        public Task<Response> HandleAsync(StudentUser studentUser, Message message)
         {
             if (RequestIsProvidedDeadline(studentUser))
             {
-                return HandleProvidedDeadline(studentUser, message);
+                return Task.FromResult(HandleProvidedDeadline(studentUser, message));
             }
             else
             {
-                return HandleAddDeadlineCommand(studentUser);
+                return Task.FromResult(HandleAddDeadlineCommand(studentUser));
             }
         }
 
@@ -35,8 +36,9 @@ namespace CourseWorkScheduleBot.Handlers
             {
                 return new()
                 {
-                    TextMessage = new() { 
-                        Text = "Помилка в інформації про дедлайн! Введіть ще раз:" 
+                    TextMessage = new()
+                    {
+                        Text = "Помилка в інформації про дедлайн! Введіть ще раз:"
                     },
                     ReplyMarkup = ReplyMarkupFactory.CreateEmptyKeyboardMarkup()
                 };

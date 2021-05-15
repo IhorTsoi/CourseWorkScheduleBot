@@ -1,5 +1,6 @@
 ﻿using CourseWorkScheduleBot.Models;
 using CourseWorkScheduleBot.Storage;
+using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
@@ -22,12 +23,12 @@ namespace CourseWorkScheduleBot.Handlers
                 message.Text.Equals(Commands.Start);
         }
 
-        public Response Handle(StudentUser studentUser, Message message)
+        public Task<Response> HandleAsync(StudentUser studentUser, Message message)
         {
             var userId = message.From.Id;
             localStorage.AddUser(new(userId));
 
-            return new()
+            return Task.FromResult(new Response()
             {
                 TextMessage = new()
                 {
@@ -36,7 +37,7 @@ namespace CourseWorkScheduleBot.Handlers
                     "Будь-ласка, введіть назву Вашого проекту:"
                 },
                 ReplyMarkup = ReplyMarkupFactory.CreateEmptyKeyboardMarkup()
-            };
+            });
         }
     }
 }
